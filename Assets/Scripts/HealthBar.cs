@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +7,6 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Player _player;
     
     private float _maxDeltaChangeHeath = 0.5f;
-
-    private void Start()
-    {
-        _slider.value = _player.Health;
-    }
 
     private void OnEnable()
     {
