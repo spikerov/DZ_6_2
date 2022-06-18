@@ -7,34 +7,31 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private Player _player;
-    [SerializeField] private Button _damageButton;
-    [SerializeField] private Button _treatmentButton;
-
-    private float _damage = 10;
-    private float _treatment = 10;
-    private float _currentValue;
-    private float _maxDeltaChangeHeath = 1;
+    
+    private float _maxDeltaChangeHeath = 0.5f;
 
     private void Start()
     {
         _slider.value = _player.Health;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        _damageButton.onClick.AddListener(Damage);
-        _treatmentButton.onClick.AddListener(Treatment);
+        _player.TookDamage += ChangeSliderVaalue;
+        _player.Healed += ChangeSliderVaalue;
     }
 
-    public void Damage()
+    private void OnDisable()
     {
-        _currentValue = _slider.value - _damage;
-        _slider.value = Mathf.MoveTowards(_slider.value, _currentValue, _maxDeltaChangeHeath * Time.deltaTime);
+        _player.TookDamage -= ChangeSliderVaalue;
+        _player.Healed -= ChangeSliderVaalue;
     }
 
-    public void Treatment()
+    public void ChangeSliderVaalue(float target)
     {
-        _currentValue = _slider.value + _treatment;
-        _slider.value = Mathf.MoveTowards(_slider.value, _currentValue, _maxDeltaChangeHeath * Time.deltaTime);
+        while (_slider.value != target)
+        {
+            _slider.value = Mathf.MoveTowards(_slider.value, target, _maxDeltaChangeHeath * Time.deltaTime);
+        }
     }
 }
