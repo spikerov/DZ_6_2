@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         _slider.value = _health;
     }
 
-    public void Damage()
+    public void TakeDamage()
     {
         if (_health != _minHeath)
         {
