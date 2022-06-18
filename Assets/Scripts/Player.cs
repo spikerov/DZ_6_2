@@ -12,8 +12,7 @@ public class Player : MonoBehaviour
     private float _maxHealth = 100;
     private float _minHeath = 0;
 
-    public event UnityAction<float> TookDamage;
-    public event UnityAction<float> Healed;
+    public event UnityAction<float> ChangedHealth;
 
     public float Health => _health;
 
@@ -27,7 +26,7 @@ public class Player : MonoBehaviour
         if (_health != _minHeath)
         {
             _health -= _damage;
-            TookDamage.Invoke(_health);
+            ChangedHealth.Invoke(_health);
         }
     }
 
@@ -36,7 +35,7 @@ public class Player : MonoBehaviour
         if (_health != _maxHealth)
         {
             _health += _treatment;
-            Healed.Invoke(_health);
+            ChangedHealth.Invoke(_health);
         }
     }
 }

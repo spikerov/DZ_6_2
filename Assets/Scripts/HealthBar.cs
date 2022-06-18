@@ -10,14 +10,12 @@ public class HealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.TookDamage += ChangeSliderVaalue;
-        _player.Healed += ChangeSliderVaalue;
+        _player.ChangedHealth += ChangeSliderVaalue;
     }
 
     private void OnDisable()
     {
-        _player.TookDamage -= ChangeSliderVaalue;
-        _player.Healed -= ChangeSliderVaalue;
+        _player.ChangedHealth -= ChangeSliderVaalue;
     }
 
     public void ChangeSliderVaalue(float target)
